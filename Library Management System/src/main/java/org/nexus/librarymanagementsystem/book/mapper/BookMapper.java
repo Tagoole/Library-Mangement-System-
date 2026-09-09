@@ -20,7 +20,7 @@ public class BookMapper {
 
         return book;
     }
-    
+
     public BookResponse toResponse(Book book){
         return new BookResponse(
                 book.getId(),
