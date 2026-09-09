@@ -9,8 +9,7 @@ import java.util.List;
 public record MemberResponse(
         Long id,
         String username,
-        Email email,
-        //List<Loan> loanList,
+        String email,
         LocalDateTime createdAt
 
 ) {

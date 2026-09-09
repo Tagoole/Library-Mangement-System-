@@ -4,6 +4,6 @@ import jakarta.validation.constraints.Email;
 
 public record MemberRequest(
         String username,
-        Email email
+        String email
 ) {
 }

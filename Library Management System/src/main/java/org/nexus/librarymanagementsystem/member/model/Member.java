@@ -26,8 +26,9 @@ public class Member {
   @Column(nullable = false, name = "username")
   private String userName;
 
+  @Email(message = "Must be a valid email address")
   @Column(nullable = false, unique = true)
-  private Email email;
+  private String email;
 
   @OneToMany(mappedBy = "member")
   private List<Loan> loanList = new ArrayList<>();
