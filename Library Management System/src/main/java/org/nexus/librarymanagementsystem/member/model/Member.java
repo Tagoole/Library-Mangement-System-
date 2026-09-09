@@ -11,6 +11,7 @@ import org.nexus.librarymanagementsystem.loan.model.Loan;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -32,7 +33,7 @@ public class Member {
     private Email email;
 
     @OneToMany(mappedBy = "member")
-    private List<Loan> loanList;
+    private List<Loan> loanList = new ArrayList<>();
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;

@@ -10,6 +10,7 @@ import lombok.Setter;
 import org.nexus.librarymanagementsystem.loan.model.Loan;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -38,7 +39,7 @@ public class Book {
     private int totalCopies;
 
     @OneToMany(mappedBy = "book")
-    private List<Loan> loanList;
+    private List<Loan> loanList = new ArrayList<>();
 
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
