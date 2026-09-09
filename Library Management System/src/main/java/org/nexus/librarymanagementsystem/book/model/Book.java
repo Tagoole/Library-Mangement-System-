@@ -7,8 +7,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.nexus.librarymanagementsystem.loan.model.Loan;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "books")
@@ -35,6 +37,8 @@ public class Book {
     @Min(value = 0)
     private int totalCopies;
 
+    @OneToMany(mappedBy = "book")
+    private List<Loan> loanList;
 
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
