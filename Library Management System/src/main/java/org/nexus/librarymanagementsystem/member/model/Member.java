@@ -7,6 +7,11 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.nexus.librarymanagementsystem.loan.model.Loan;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "members")
@@ -26,5 +31,14 @@ public class Member {
     @Column(nullable = false, unique = true)
     private Email email;
 
+    @OneToMany(mappedBy = "member")
+    private List<Loan> loanList;
 
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
+
+    @PrePersist
+    protected void onCreate(){
+        this.createdAt = LocalDateTime.now();
+    }
 }
