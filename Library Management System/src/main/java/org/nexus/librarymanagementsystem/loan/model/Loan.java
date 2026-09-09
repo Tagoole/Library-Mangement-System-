@@ -1,15 +1,13 @@
 package org.nexus.librarymanagementsystem.loan.model;
 
-
 import jakarta.persistence.*;
+import java.time.LocalDate;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.nexus.librarymanagementsystem.book.model.Book;
 import org.nexus.librarymanagementsystem.member.model.Member;
-
-import java.time.LocalDate;
 
 @Entity
 @Table(name = "loans")
@@ -19,31 +17,30 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class Loan {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "book_id")
-    private Book book;
+  @ManyToOne
+  @JoinColumn(name = "book_id")
+  private Book book;
 
-    @ManyToOne
-    @JoinColumn(name = "member_id")
-    private Member member;
+  @ManyToOne
+  @JoinColumn(name = "member_id")
+  private Member member;
 
-    @Column(nullable = false, name = "due_date")
-    private LocalDate dueDate;
+  @Column(nullable = false, name = "due_date")
+  private LocalDate dueDate;
 
-    @Column(name = "returned_at")
-    private LocalDate returnedAt;
+  @Column(name = "returned_at")
+  private LocalDate returnedAt;
 
-    @Column(nullable = false,name = "created_at")
-    private LocalDate createdAt;
+  @Column(nullable = false, name = "created_at")
+  private LocalDate createdAt;
 
-    
-    @PrePersist
-    protected void onCreate(){
-        this.createdAt = LocalDate.now();
-        this.dueDate = createdAt.plusDays(3);
-    }
+  @PrePersist
+  protected void onCreate() {
+    this.createdAt = LocalDate.now();
+    this.dueDate = createdAt.plusDays(3);
+  }
 }

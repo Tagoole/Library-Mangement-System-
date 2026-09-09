@@ -7,15 +7,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class LibraryManagementSystemApplication {
 
-
   public static void main(String[] args) {
 
-    Dotenv dotenv = Dotenv
-            .configure()
-            .ignoreIfMissing()
-            .load();
+    Dotenv dotenv = Dotenv.configure().ignoreIfMissing().load();
 
-    dotenv.entries().forEach(entry->System.setProperty(entry.getKey(),entry.getValue()));
+    dotenv.entries().forEach(entry -> System.setProperty(entry.getKey(), entry.getValue()));
     SpringApplication.run(LibraryManagementSystemApplication.class, args);
   }
 }
