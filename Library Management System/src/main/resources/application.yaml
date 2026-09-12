@@ -4,7 +4,7 @@ spring:
 
   datasource:
     datasource:
-      url: jdbc:postgresql://localhost:5432/capstoneapidb
+      url: jdbc:postgresql://localhost:5432/librarydb
       username: postgres
       password: mugwadavid
 
