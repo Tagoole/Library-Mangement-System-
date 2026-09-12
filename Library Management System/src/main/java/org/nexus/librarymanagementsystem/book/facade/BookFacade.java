@@ -22,6 +22,6 @@ public class BookFacade {
         Book book = bookMapper.toEntity(bookRequest);
         Book savedBook = bookMapper.toResponse(book);
 
-        return 
+        return savedBook;
     }
 }
