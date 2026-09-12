@@ -1,19 +1,13 @@
 package org.nexus.librarymanagementsystem.book.dto;
 
-
-import jakarta.persistence.Column;
-import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.Min;
-import org.nexus.librarymanagementsystem.loan.model.Loan;
-
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 public record BookRequest(
-        String title,
-        String author,
-        String isbn,
-        int totalCopies
-) {
-}
+    @NotBlank(message = "Title cannot be blank") String title,
+    @NotBlank(message = "Author cannot be blank") String author,
+    @NotBlank(message = "ISBN cannot be blank") String isbn,
+    @NotNull(message = "Total copies is required")
+        @Min(value = 0, message = "Total copies cannot be negative")
+        Integer totalCopies) {}

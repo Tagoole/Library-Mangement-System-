@@ -36,7 +36,7 @@ public class Book {
   @Min(value = 0)
   private int totalCopies;
 
-  @OneToMany(mappedBy = "book")
+  @OneToMany(mappedBy = "book", fetch = FetchType.LAZY)
   private List<Loan> loanList = new ArrayList<>();
 
   @Column(name = "created_at", nullable = false)

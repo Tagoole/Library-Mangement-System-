@@ -1,7 +1,7 @@
 package org.nexus.librarymanagementsystem.loan.exception;
 
 public class LoanNotFoundException extends RuntimeException {
-    public LoanNotFoundException(String message) {
-        super(message);
-    }
+  public LoanNotFoundException(String message) {
+    super(message);
+  }
 }

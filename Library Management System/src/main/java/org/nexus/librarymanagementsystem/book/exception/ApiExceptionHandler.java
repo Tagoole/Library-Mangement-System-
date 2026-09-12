@@ -1,6 +1,7 @@
 package org.nexus.librarymanagementsystem.book.exception;
 
-
+import java.util.List;
+import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
 import org.nexus.librarymanagementsystem.book.dto.ApiResponse;
 import org.springframework.http.HttpStatus;
@@ -9,54 +10,37 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import java.util.List;
-import java.util.Map;
-
 @Slf4j
 @RestControllerAdvice
 public class ApiExceptionHandler {
 
-    @ExceptionHandler(BookNotFoundException.class)
-    public ResponseEntity<ApiResponse<Object>> handleNotFound(BookNotFoundException exception){
-        ApiResponse<Object> body = new ApiResponse<>(
-                "BOOK NOT FOUND",
-                exception.getMessage(),
-                null
-        );
+  @ExceptionHandler(BookNotFoundException.class)
+  public ResponseEntity<ApiResponse<Object>> handleNotFound(BookNotFoundException exception) {
+    ApiResponse<Object> body = new ApiResponse<>("BOOK NOT FOUND", exception.getMessage(), null);
 
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(body);
-    }
+    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(body);
+  }
 
+  @ExceptionHandler(MethodArgumentNotValidException.class)
+  public ResponseEntity<ApiResponse<Object>> handleValidation(
+      MethodArgumentNotValidException exception) {
+    List<Map<String, String>> errors =
+        exception.getBindingResult().getFieldErrors().stream()
+            .map(f -> Map.of("field", f.getField(), "message", f.getDefaultMessage()))
+            .toList();
 
+    ApiResponse<Object> body =
+        new ApiResponse<>("BAD_REQUEST", "Validation Error", Map.of("errors", errors));
 
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ApiResponse<Object>> handleValidation(MethodArgumentNotValidException exception){
-        List<Map<String, String>> errors = exception.getBindingResult()
-                .getFieldErrors().stream()
-                .map(f -> Map.of("field", f.getField(),
-                        "message", f.getDefaultMessage()))
-                .toList();
+    return ResponseEntity.badRequest().body(body);
+  }
 
+  @ExceptionHandler(Exception.class)
+  public ResponseEntity<ApiResponse<Object>> handleUnExpected(Exception exception) {
+    log.error("Unexpected Error", exception);
+    ApiResponse<Object> body =
+        new ApiResponse<>("INTERNAL SERVER ERROR", "Something Went Wrong", null);
 
-        ApiResponse<Object> body = new ApiResponse<>(
-                "BAD_REQUEST",
-                "Validation Error",
-                Map.of("errors",errors)
-        );
-
-        return ResponseEntity.badRequest().body(body);
-    }
-
-
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<ApiResponse<Object>> handleUnExpected(Exception exception){
-        log.error("Unexpected Error",exception );
-        ApiResponse<Object> body = new ApiResponse<>(
-                "INTERNAL SERVER ERROR",
-                "Something Went Wrong",
-                null
-        );
-
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(body);
-    }
+    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(body);
+  }
 }
