@@ -7,14 +7,15 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class MemberMapper {
-    public Member toEntity(MemberRequest request) {
-        Member member = new Member();
-        member.setUserName(request.username());
-        member.setEmail(request.email());
-        return member;
-    }
+  public Member toEntity(MemberRequest request) {
+    Member member = new Member();
+    member.setUserName(request.username());
+    member.setEmail(request.email());
+    return member;
+  }
 
-    public MemberResponse toResponse(Member member) {
-        return new MemberResponse(member.getId(), member.getUserName(), member.getEmail(), member.getCreatedAt());
-    }
+  public MemberResponse toResponse(Member member) {
+    return new MemberResponse(
+        member.getId(), member.getUserName(), member.getEmail(), member.getCreatedAt());
+  }
 }
