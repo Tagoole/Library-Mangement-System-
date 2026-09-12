@@ -28,6 +28,10 @@ public class LoanService {
         .orElseThrow(() -> new LoanNotFoundException("No loan found with id " + id));
   }
 
+    public List<Loan> findAllWithBookAndMember() {
+        return loanRepository.findAllWithBookAndMember();
+    }
+
   public List<Loan> findAll() {
     return loanRepository.findAll();
   }
