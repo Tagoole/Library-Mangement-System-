@@ -21,7 +21,7 @@ public class Member {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long Id;
+  private Long id;
 
   @Column(nullable = false, name = "username")
   private String userName;
@@ -30,7 +30,7 @@ public class Member {
   @Column(nullable = false, unique = true)
   private String email;
 
-  @OneToMany(mappedBy = "member")
+  @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
   private List<Loan> loanList = new ArrayList<>();
 
   @Column(name = "created_at")
