@@ -22,11 +22,11 @@ public class BookService {
     return bookRepository.save(book);
   }
 
+  public Page<Book> findPage(int page, int size, String sortBy) {
+    Pageable pageable = PageRequest.of(page - 1, size, Sort.by(sortBy).ascending());
+    return bookRepository.findAll(pageable);
+  }
 
-    public Page<Book> findPage(int page, int size, String sortBy) {
-        Pageable pageable = PageRequest.of(page - 1, size, Sort.by(sortBy).ascending());
-        return bookRepository.findAll(pageable);
-    }
   public Book findById(Long id) {
     return bookRepository
         .findById(id)
