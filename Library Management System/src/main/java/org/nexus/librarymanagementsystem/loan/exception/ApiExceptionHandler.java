@@ -35,6 +35,12 @@ public class ApiExceptionHandler {
     return ResponseEntity.badRequest().body(body);
   }
 
+  @ExceptionHandler(ConflictException.class)
+  public ResponseEntity<ApiResponse<Object>> handleConflict(ConflictException ex) {
+    return ResponseEntity.status(HttpStatus.CONFLICT)
+        .body(new ApiResponse<>("CONFLICT", ex.getMessage(), null));
+  }
+
   @ExceptionHandler(Exception.class)
   public ResponseEntity<ApiResponse<Object>> handleUnExpected(Exception exception) {
     log.error("Unexpected Error", exception);
