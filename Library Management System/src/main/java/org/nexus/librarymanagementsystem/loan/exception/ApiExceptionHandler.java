@@ -3,7 +3,7 @@ package org.nexus.librarymanagementsystem.loan.exception;
 
 import lombok.extern.slf4j.Slf4j;
 import org.nexus.librarymanagementsystem.book.dto.ApiResponse;
-import org.nexus.librarymanagementsystem.book.exception.BookNotFoundException;
+import org.nexus.librarymanagementsystem.loan.exception.LoanNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -17,10 +17,10 @@ import java.util.Map;
 @RestControllerAdvice
 public class ApiExceptionHandler {
 
-    @ExceptionHandler(BookNotFoundException.class)
-    public ResponseEntity<ApiResponse<Object>> handleNotFound(BookNotFoundException exception){
+    @ExceptionHandler(LoanNotFoundException.class)
+    public ResponseEntity<ApiResponse<Object>> handleNotFound(LoanNotFoundException exception){
         ApiResponse<Object> body = new ApiResponse<>(
-                "BOOK NOT FOUND",
+                "LOAN NOT FOUND",
                 exception.getMessage(),
                 null
         );
