@@ -4,6 +4,10 @@ import java.util.List;
 import org.nexus.librarymanagementsystem.book.exception.BookNotFoundException;
 import org.nexus.librarymanagementsystem.book.model.Book;
 import org.nexus.librarymanagementsystem.book.repository.BookRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -18,6 +22,11 @@ public class BookService {
     return bookRepository.save(book);
   }
 
+
+    public Page<Book> findPage(int page, int size, String sortBy) {
+        Pageable pageable = PageRequest.of(page - 1, size, Sort.by(sortBy).ascending());
+        return bookRepository.findAll(pageable);
+    }
   public Book findById(Long id) {
     return bookRepository
         .findById(id)
