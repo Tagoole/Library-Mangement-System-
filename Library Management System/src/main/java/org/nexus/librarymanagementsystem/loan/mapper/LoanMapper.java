@@ -8,17 +8,20 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class LoanMapper {
-    public Loan toEntity(Book book, Member member) {
-        Loan loan = new Loan();
-        loan.setBook(book);
-        loan.setMember(member);
-        return loan;
-    }
+  public Loan toEntity(Book book, Member member) {
+    Loan loan = new Loan();
+    loan.setBook(book);
+    loan.setMember(member);
+    return loan;
+  }
 
-    public LoanResponse toResponse(Loan loan) {
-        return new LoanResponse(
-                loan.getId(), loan.getBook().getId(), loan.getMember().getId(),
-                loan.getDueDate(), loan.getReturnedAt(), loan.getCreatedAt()
-        );
-    }
+  public LoanResponse toResponse(Loan loan) {
+    return new LoanResponse(
+        loan.getId(),
+        loan.getBook().getId(),
+        loan.getMember().getId(),
+        loan.getDueDate(),
+        loan.getReturnedAt(),
+        loan.getCreatedAt());
+  }
 }
