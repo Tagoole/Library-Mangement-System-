@@ -24,7 +24,7 @@ public class Member {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @Column(nullable = false, name = "username",unique = true)
+  @Column(nullable = false, name = "username", unique = true)
   private String userName;
 
   @Email(message = "Must be a valid email address")
