@@ -1,7 +1,7 @@
 package org.nexus.librarymanagementsystem.member.service;
 
 import java.util.List;
-import org.nexus.librarymanagementsystem.member.exception.MemberNotFoundException;
+import org.nexus.librarymanagementsystem.common.exception.MemberNotFoundException;
 import org.nexus.librarymanagementsystem.member.model.Member;
 import org.nexus.librarymanagementsystem.member.repository.MemberRepository;
 import org.springframework.stereotype.Service;

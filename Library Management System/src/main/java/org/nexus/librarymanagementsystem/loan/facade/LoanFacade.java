@@ -4,9 +4,9 @@ import java.time.LocalDate;
 import java.util.List;
 import org.nexus.librarymanagementsystem.book.model.Book;
 import org.nexus.librarymanagementsystem.book.service.BookService;
+import org.nexus.librarymanagementsystem.common.exception.ConflictException;
 import org.nexus.librarymanagementsystem.loan.dto.LoanRequest;
 import org.nexus.librarymanagementsystem.loan.dto.LoanResponse;
-import org.nexus.librarymanagementsystem.loan.exception.ConflictException;
 import org.nexus.librarymanagementsystem.loan.mapper.LoanMapper;
 import org.nexus.librarymanagementsystem.loan.model.Loan;
 import org.nexus.librarymanagementsystem.loan.service.LoanService;
@@ -54,11 +54,10 @@ public class LoanFacade {
     return loanMapper.toResponse(loanService.findById(id));
   }
 
-
-    @Transactional(readOnly = true)
-    public List<LoanResponse> findAll() {
-        return loanService.findAllWithBookAndMember().stream().map(loanMapper::toResponse).toList();
-    }
+  @Transactional(readOnly = true)
+  public List<LoanResponse> findAll() {
+    return loanService.findAllWithBookAndMember().stream().map(loanMapper::toResponse).toList();
+  }
 
   @Transactional
   public LoanResponse returnLoan(Long id) {

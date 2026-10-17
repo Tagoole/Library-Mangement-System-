@@ -1,7 +1,7 @@
 package org.nexus.librarymanagementsystem.loan.service;
 
 import java.util.List;
-import org.nexus.librarymanagementsystem.loan.exception.LoanNotFoundException;
+import org.nexus.librarymanagementsystem.common.exception.LoanNotFoundException;
 import org.nexus.librarymanagementsystem.loan.model.Loan;
 import org.nexus.librarymanagementsystem.loan.repository.LoanRepository;
 import org.springframework.stereotype.Service;
@@ -28,9 +28,9 @@ public class LoanService {
         .orElseThrow(() -> new LoanNotFoundException("No loan found with id " + id));
   }
 
-    public List<Loan> findAllWithBookAndMember() {
-        return loanRepository.findAllWithBookAndMember();
-    }
+  public List<Loan> findAllWithBookAndMember() {
+    return loanRepository.findAllWithBookAndMember();
+  }
 
   public List<Loan> findAll() {
     return loanRepository.findAll();

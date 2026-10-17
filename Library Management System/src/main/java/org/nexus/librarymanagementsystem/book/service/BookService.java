@@ -1,9 +1,9 @@
 package org.nexus.librarymanagementsystem.book.service;
 
 import java.util.List;
-import org.nexus.librarymanagementsystem.book.exception.BookNotFoundException;
 import org.nexus.librarymanagementsystem.book.model.Book;
 import org.nexus.librarymanagementsystem.book.repository.BookRepository;
+import org.nexus.librarymanagementsystem.common.exception.BookNotFoundException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
