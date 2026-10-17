@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.nexus.librarymanagementsystem.common.security.model.Role;
 import org.nexus.librarymanagementsystem.loan.model.Loan;
 
 @Entity
@@ -23,12 +24,19 @@ public class Member {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @Column(nullable = false, name = "username")
+  @Column(nullable = false, name = "username",unique = true)
   private String userName;
 
   @Email(message = "Must be a valid email address")
   @Column(nullable = false, unique = true)
   private String email;
+
+  @Column(nullable = false)
+  private String password;
+
+  @Enumerated(EnumType.STRING)
+  @Column(nullable = false)
+  private Role role;
 
   @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
   private List<Loan> loanList = new ArrayList<>();
