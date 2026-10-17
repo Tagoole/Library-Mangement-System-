@@ -54,10 +54,11 @@ public class LoanFacade {
     return loanMapper.toResponse(loanService.findById(id));
   }
 
-  @Transactional(readOnly = true)
-  public List<LoanResponse> findAll() {
-    return loanService.findAll().stream().map(loanMapper::toResponse).toList();
-  }
+
+    @Transactional(readOnly = true)
+    public List<LoanResponse> findAll() {
+        return loanService.findAllWithBookAndMember().stream().map(loanMapper::toResponse).toList();
+    }
 
   @Transactional
   public LoanResponse returnLoan(Long id) {
