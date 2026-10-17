@@ -31,18 +31,18 @@ public class JwtService {
         .compact();
   }
 
-  private <T> T extractClaim(String token, Function<Claims,T> resolver){
-    Claims claims=Jwts.parser().verifyWith(signingKey()).build().parseSignedClaims(token).getPayload();
+  private <T> T extractClaim(String token, Function<Claims, T> resolver) {
+    Claims claims =
+        Jwts.parser().verifyWith(signingKey()).build().parseSignedClaims(token).getPayload();
     return resolver.apply(claims);
   }
 
-  private boolean isExpired(String token){
-    return extractClaim(token,Claims::getExpiration).before(new Date());
+  private boolean isExpired(String token) {
+    return extractClaim(token, Claims::getExpiration).before(new Date());
   }
 
-
-  public String extractUserName(String token){
-    return extractClaim(token,Claims::getSubject);
+  public String extractUserName(String token) {
+    return extractClaim(token, Claims::getSubject);
   }
 
   public boolean isValid(String token, CustomUserDetails userDetails) {

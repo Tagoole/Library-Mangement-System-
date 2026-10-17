@@ -36,7 +36,7 @@ public class Member {
 
   @Enumerated(EnumType.STRING)
   @Column(nullable = false)
-  private Role role;
+  private Role role = Role.MEMBER;
 
   @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
   private List<Loan> loanList = new ArrayList<>();
